@@ -11,9 +11,6 @@ LFOmics is a powerful web tool designed for integrating multiomic data using aut
 - [Data Preparation](#data-preparation)
 - [Running the Tool](#running-the-tool)
 - [Results](#results)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
 
 ## Introduction
 
