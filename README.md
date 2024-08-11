@@ -7,7 +7,6 @@ LFOmics is a powerful web tool designed for integrating multiomic data using aut
 - [Introduction](#introduction)
 - [Background](#background)
 - [Features](#features)
-- [Usage](#usage)
 - [Test Data Sources](#test-data-sources)
 - [Data Preparation](#data-preparation)
 - [Running the Tool](#running-the-tool)
@@ -19,6 +18,14 @@ LFOmics is a powerful web tool designed for integrating multiomic data using aut
 Multiomic data integration is a crucial step in understanding complex biological systems. LFOmics leverages the power of autoencoders to extract latent features from multiomic datasets, providing a unified view of the data. The extracted features are then subjected to functional enrichment analysis using GSEApy enrichr to identify significantly enriched pathways and biological processes.
 
 ## Background
+
+LFOmics was created to address the growing need for robust tools capable of integrating and analyzing multiomic data. Multiomics involves the simultaneous study of different types of 'omics' data (e.g., genomics, transcriptomics, proteomics) to gain a comprehensive view of biological systems. The complexity and high dimensionality of such data pose significant challenges for traditional analysis methods.
+
+To overcome these challenges, LFOmics employs an autoencoder-based approach to extract latent features from multiomic datasets. Autoencoders are neural networks that compress data into a lower-dimensional space, capturing essential features while reducing noise. These latent features provide a more manageable representation of the data, enabling more effective downstream analysis.
+
+Once the latent features are extracted, LFOmics leverages GSEApy Enrichr for functional enrichment analysis. Gene Set Enrichment Analysis (GSEA) is a statistical method used to determine whether a predefined set of genes shows statistically significant differences between two biological states. By applying GSEA to the latent features, LFOmics identifies key pathways and biological processes that are significantly enriched, providing valuable insights into the underlying biology.
+
+LFOmics is designed to be user-friendly, with an intuitive web interface that allows researchers to upload their data, run analyses, and receive results with minimal effort. This tool is ideal for researchers looking to uncover hidden patterns in complex multiomic datasets and gain a deeper understanding of the biological systems they study.
 
 ## Features
 
