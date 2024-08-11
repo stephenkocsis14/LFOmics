@@ -35,8 +35,6 @@ LFOmics is designed to be user-friendly, with an intuitive web interface that al
 - **Support for Multiple Omic Types:** Handles diverse types of omic data, including those which gene symbols are features.
 - **Intermediate Files Provided:** Provides CSV files for all of the intermediate matrices and functional enrichment results.
 
-## Usage
-
 ## Test Data Sources
 
 LFOmics was developed and tested using publicly available RNA sequencing datasets:
