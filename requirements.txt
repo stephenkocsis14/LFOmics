@@ -1,0 +1,15 @@
+# Data Handling and Processing
+pandas
+numpy
+
+# Machine Learning and Neural Networks
+torch
+
+# Visualization
+matplotlib
+
+# Gene Set Enrichment Analysis
+gseapy
+
+# MySQL Database Connectivity
+mysql-connector-python
