@@ -1,3 +1,5 @@
+#!/usr/local/bin/python3
+
 import gseapy as gp
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -9,8 +11,8 @@ def run_gseapy_analysis(latent_features_path):
     enr = gp.enrichr(gene_list=gene_list, description='pathway', gene_sets='KEGG_2016')
 
     # Save results
-    decoded_features_path = '../data/processed/decoded_top_latent.csv'
-    enrichment_results_path = '../data/results/enrichment.csv'
+    decoded_features_path = '/var/www/html/skocsis2/LFOmics/data/processed/decoded_top_latent.csv'
+    enrichment_results_path = '/var/www/html/skocsis2/LFOmics/data/results/enrichment.csv'
     enr.results.to_csv(enrichment_results_path, index=False)
     pd.DataFrame(latent_features).to_csv(decoded_features_path, index=False)
 
@@ -29,7 +31,7 @@ def plot_enrichment_scores(results):
     plt.xlabel('Enrichment Score')
     plt.title('Top 10 Enriched KEGG Pathways')
     plt.gca().invert_yaxis()
-    plt.savefig('../data/results/enrichment_scores.png')
+    plt.savefig('/var/www/html/skocsis2/LFOmics/data/results/enrichment_scores.png')
     plt.close()
 
 def plot_p_value_distribution(results):
@@ -38,5 +40,5 @@ def plot_p_value_distribution(results):
     plt.xlabel('P-value')
     plt.ylabel('Frequency')
     plt.title('P-value Distribution for Enriched KEGG Pathways')
-    plt.savefig('../data/results/p_value_distribution.png')
+    plt.savefig('/var/www/html/skocsis2/LFOmics/data/results/p_value_distribution.png')
     plt.close()

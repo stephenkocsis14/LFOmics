@@ -1,3 +1,5 @@
+#!/usr/local/bin/python3
+
 import torch
 import torch.nn as nn
 import pandas as pd
@@ -46,7 +48,7 @@ def run_autoencoder(data):
         
         losses.append(loss.item())
 
-    latent_features_path = '../data/processed/latent.csv'
+    latent_features_path = '/var/www/html/skocsis2/LFOmics/data/processed/latent.csv'
     latent_features = model.encoder(data_tensor).detach().numpy()
     pd.DataFrame(latent_features).to_csv(latent_features_path, index=False)
 
@@ -62,5 +64,5 @@ def plot_loss_curve(losses):
     plt.title('Autoencoder Training Loss')
     plt.legend()
     plt.grid(True)
-    plt.savefig('../data/results/loss_curve.png')
+    plt.savefig('/var/www/html/skocsis2/LFOmics/data/results/loss_curve.png')
     plt.close()
