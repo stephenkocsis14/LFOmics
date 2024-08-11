@@ -13,7 +13,7 @@ from utils.file_management import save_uploaded_file, get_file_path
 cgitb.enable()
 
 # Constants
-UPLOAD_DIR = '/var/www/html/skocsis2/LFOmics/data/uploads/'
+UPLOAD_DIR = '../data/uploads/'
 
 # Get form data
 form = cgi.FieldStorage()
