@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LFOmics - Multiomic Data Integration Tool</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>LFOmics</h1>
+            <h2>Multiomic Data Integration and Functional Enrichment Analysis</h2>
+        </div>
+    </header>
+
+    <main>
+        <section id="upload-section">
+            <h2>Upload Your Multiomics Data</h2>
+            <form action="../cgi-bin/process_data.py" method="post" enctype="multipart/form-data">
+                <label for="fileUpload">Choose CSV file:</label>
+                <input type="file" id="fileUpload" name="fileUpload" accept=".csv" required>
+                
+                <label for="email">Enter your email for results:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <button type="submit">Upload and Process</button>
+            </form>
+        </section>
+        
+        <section id="info-section">
+            <h2>How It Works</h2>
+            <p>This tool integrates your multiomics data using a PyTorch autoencoder and performs functional enrichment analysis using GSEApy. Simply upload your CSV file with genes as rows and samples as columns, and we'll do the rest!</p>
+        </section>
+
+        <section id="autoencoder-section">
+            <h2>Understanding Autoencoders</h2>
+            <p>An autoencoder is a type of artificial neural network used to learn efficient representations of input data, typically for the purpose of dimensionality reduction or feature learning. It consists of two main parts: an encoder and a decoder.</p>
+            <p>The encoder maps the input data <code>x</code> to a lower-dimensional latent space <code>h</code>, while the decoder attempts to reconstruct the original input from this latent representation:</p>
+            <pre>
+Encoder:  h = f(Wx + b)
+Decoder:  x' = g(Wh + b')
+            </pre>
+            <p>Where:
+                <ul>
+                    <li><strong>x</strong>: Input data</li>
+                    <li><strong>h</strong>: Encoded (latent) representation</li>
+                    <li><strong>x'</strong>: Reconstructed data</li>
+                    <li><strong>W</strong>: Weight matrices</li>
+                    <li><strong>b</strong>: Bias vectors</li>
+                    <li><strong>f</strong>, <strong>g</strong>: Non-linear activation functions, such as ReLU or sigmoid</li>
+                </ul>
+            </p>
+            <p>The goal of training an autoencoder is to minimize the reconstruction error, which is often quantified by the Mean Squared Error (MSE) loss function:</p>
+            <pre>
+L(x, x') = ||x - x'||² = Σ (xᵢ - x'ᵢ)²
+            </pre>
+            <p>Here, <code>L</code> is the loss function, and the sum is taken over all input features. The autoencoder learns the parameters (weights and biases) by minimizing this loss using an optimization algorithm such as gradient descent.</p>
+            <p>Autoencoders are particularly useful in cases where the data has a complex, non-linear structure, as they can capture these structures in the latent space <code>h</code>. The dimensionality of <code>h</code> is typically much smaller than that of <code>x</code>, which allows for effective dimensionality reduction and feature extraction.</p>
+        </section>
+
+        <section id="gseapy-section">
+            <h2>What is GSEApy?</h2>
+            <p>GSEApy is a Python wrapper for Gene Set Enrichment Analysis (GSEA), a statistical method used to determine whether a predefined set of genes shows statistically significant differences between two biological states.</p>
+            <p>The basic logic of GSEA involves ranking all genes in the dataset according to their correlation with a phenotype. For a given gene set <code>S</code>, the Enrichment Score (ES) is calculated by walking down the list <code>L</code>, increasing a running-sum statistic when a gene is in <code>S</code>, and decreasing it when the gene is not in <code>S</code>. The ES is the maximum deviation from zero encountered in this walk:</p>
+            <pre>
+ES(S) = max_{1≤i≤N}  | Σ (wᵢ : gene i ∈ S) - Σ (wᵢ : gene i ∉ S) |
+            </pre>
+            <p>Where <code>wᵢ</code> is the weight associated with the ranking of gene <code>i</code>, typically based on its correlation with the phenotype. The ES reflects how much the genes in <code>S</code> are overrepresented at the extremes (top or bottom) of the ranked list <code>L</code>.</p>
+            <p>To determine the statistical significance of the ES, GSEA performs a permutation test. The phenotype labels are randomly permuted, and the ES is recalculated for each permutation. The p-value is then computed as the fraction of permutations that result in an ES as large as or larger than the observed ES:</p>
+            <pre>
+p-value = (number of permutations with ES ≥ observed ES) / (total number of permutations)
+            </pre>
+            <p>Finally, the false discovery rate (FDR) is calculated to account for multiple hypothesis testing, providing a measure of confidence in the significance of the enrichment results.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 LFOmics by Christian Kocsis</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

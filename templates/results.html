@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - Multiomic Data Integration Tool</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Results: Multiomic Data Integration and Functional Enrichment Analysis</h1>
+    </header>
+
+    <main>
+        <section id="results-section">
+            <h2>Your Results</h2>
+            <p>The analysis has been completed. You can download your results below:</p>
+            
+            <h3>Latent Feature Matrix</h3>
+            <a href="../data/processed/latent.csv" download>Download Latent Feature Matrix</a>
+            
+            <h3>Decoded Latent Features</h3>
+            <a href="../data/processed/decoded_top_latent.csv" download>Download Decoded Latent Features</a>
+            
+            <h3>Enrichment Analysis Results</h3>
+            <a href="../data/results/enrichment.csv" download>Download Enrichment Results</a>
+
+            <h3>Model Training Loss</h3>
+            <img src="../data/results/loss_curve.png" alt="Training Loss Curve" style="max-width:100%; height:auto;">
+
+            <h3>Top Enrichment Scores</h3>
+            <img src="../data/results/enrichment_scores.png" alt="Top Enrichment Scores" style="max-width:100%; height:auto;">
+
+            <h3>P-value Distribution</h3>
+            <img src="../data/results/p_value_distribution.png" alt="P-value Distribution" style="max-width:100%; height:auto;">
+        </section>
+        
+        <section id="further-analysis">
+            <h2>Next Steps</h2>
+            <p>If you'd like to perform additional analyses or visualizations, you can use the provided output files as inputs to your own tools or scripts.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Multiomic Data Integration Tool by Christian Kocsis</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
