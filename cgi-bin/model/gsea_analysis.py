@@ -3,42 +3,41 @@
 import gseapy as gp
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
+import os
 
-def run_gseapy_analysis(latent_features_path):
-    latent_features = pd.read_csv(latent_features_path)
-    gene_list = latent_features.columns.tolist()
-
-    enr = gp.enrichr(gene_list=gene_list, description='pathway', gene_sets='KEGG_2016')
-
-    # Save results
-    decoded_features_path = '/var/www/html/skocsis2/LFOmics/data/processed/decoded_top_latent.csv'
-    enrichment_results_path = '/var/www/html/skocsis2/LFOmics/data/results/enrichment.csv'
-    enr.results.to_csv(enrichment_results_path, index=False)
-    pd.DataFrame(latent_features).to_csv(decoded_features_path, index=False)
-
-    # Generate visualizations
-    plot_enrichment_scores(enr.results)
-    plot_p_value_distribution(enr.results)
-
-    return decoded_features_path, enrichment_results_path
-
-def plot_enrichment_scores(results):
-    # Sort results by enrichment score and take top 10
-    top_results = results.sort_values('Enrichment Score', ascending=False).head(10)
-
+def run_gseapy_analysis(gene_approximations_path):
+    # Load the gene approximations
+    gene_approximations = pd.read_csv(gene_approximations_path, index_col=0)
+    
+    # Select the top contributing genes for GSEA (e.g., by variance)
+    top_genes = gene_approximations.var(axis=1).nlargest(1000).index.tolist()
+    
+    # Perform GSEApy analysis
+    gsea_results = gp.enrichr(
+        gene_list=top_genes,
+        gene_sets='KEGG_2019_Human',
+        outdir=None  # No output files
+    )
+    
+    # Save the results
+    enrichment_results_path = '/var/www/html/skocsis2/LFOmics/results/enrichment_results.csv'
+    gsea_results.res2d.to_csv(enrichment_results_path, index=False)
+    
+    # Plot the top 10 enrichment scores
+    top_10_results = gsea_results.res2d.head(10)
+    
     plt.figure(figsize=(10, 6))
-    plt.barh(top_results['Term'], top_results['Enrichment Score'], color='blue')
-    plt.xlabel('Enrichment Score')
-    plt.title('Top 10 Enriched KEGG Pathways')
-    plt.gca().invert_yaxis()
-    plt.savefig('/var/www/html/skocsis2/LFOmics/data/results/enrichment_scores.png')
-    plt.close()
-
-def plot_p_value_distribution(results):
-    plt.figure(figsize=(10, 6))
-    plt.hist(results['P-value'], bins=50, color='green', edgecolor='black')
-    plt.xlabel('P-value')
-    plt.ylabel('Frequency')
-    plt.title('P-value Distribution for Enriched KEGG Pathways')
-    plt.savefig('/var/www/html/skocsis2/LFOmics/data/results/p_value_distribution.png')
-    plt.close()
+    sns.barplot(x='Combined Score', y='Term', data=top_10_results)
+    plt.title('Top 10 Enrichment Scores')
+    plt.xlabel('Combined Score')
+    plt.ylabel('Gene Set')
+    
+    # Save the plot as an image
+    plot_path = '/var/www/html/skocsis2/LFOmics/results/top_10_enrichment_scores.png'
+    plt.savefig(plot_path)
+    
+    # Clear the plot to prevent overlap in case of subsequent plotting
+    plt.clf()
+    
+    return enrichment_results_path, plot_path
