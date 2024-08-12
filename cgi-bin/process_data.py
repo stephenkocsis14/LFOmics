@@ -1,7 +1,5 @@
 #!/usr/local/bin/python3
 
-#!/usr/bin/env python3
-
 import cgi
 import os
 import cgitb
@@ -27,12 +25,12 @@ file_path = save_uploaded_file(uploaded_file, UPLOAD_DIR)
 processed_data = process_input_data(file_path)
 
 # Run the autoencoder model
-latent_features_path, gene_approximations_path = run_autoencoder(processed_data)
+latent_features_path, gene_approximations_path, loss_plot_path = run_autoencoder(processed_data)
 
 # Run GSEApy analysis
-enrichment_results_path = run_gseapy_analysis(gene_approximations_path)
+enrichment_results_path, plot_path = run_gseapy_analysis(gene_approximations_path)
 
-# Output results (e.g., redirect or show in HTML)
+# Output results (redirect to the results page)
 print("Content-Type: text/html")
 print()
 print(f"""
