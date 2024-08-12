@@ -21,7 +21,7 @@ def run_gseapy_analysis(gene_approximations_path):
     )
     
     # Save the results
-    enrichment_results_path = '/var/www/html/skocsis2/LFOmics/results/enrichment_results.csv'
+    enrichment_results_path = '../results/enrichment_results.csv'
     gsea_results.res2d.to_csv(enrichment_results_path, index=False)
     
     # Plot the top 10 enrichment scores
@@ -34,7 +34,7 @@ def run_gseapy_analysis(gene_approximations_path):
     plt.ylabel('Gene Set')
     
     # Save the plot as an image
-    plot_path = '/var/www/html/skocsis2/LFOmics/results/top_10_enrichment_scores.png'
+    plot_path = '../results/top_10_enrichment_scores.png'
     plt.savefig(plot_path)
     
     # Clear the plot to prevent overlap in case of subsequent plotting
