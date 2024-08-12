@@ -65,8 +65,8 @@ def run_autoencoder(df, hidden_dim=10):
     gene_approximations = decoded_features_df.loc[top_1000_genes]
     
     # Save the results
-    latent_features_path = '/var/www/html/skocsis2/LFOmics/results/latent_features_top_1000.csv'
-    gene_approximations_path = '/var/www/html/skocsis2/LFOmics/results/gene_approximations_top_1000.csv'
+    latent_features_path = '../results/latent_features_top_1000.csv'
+    gene_approximations_path = '../results/gene_approximations_top_1000.csv'
     top_1000_df.to_csv(latent_features_path, index=True)
     gene_approximations.to_csv(gene_approximations_path, index=True)
     
@@ -76,7 +76,7 @@ def run_autoencoder(df, hidden_dim=10):
     plt.title('Model Training Loss')
     plt.xlabel('Epoch')
     plt.ylabel('Loss')
-    loss_plot_path = '/var/www/html/skocsis2/LFOmics/results/loss_curve.png'
+    loss_plot_path = '../results/loss_curve.png'
     plt.savefig(loss_plot_path)
     plt.close()
     
