@@ -3,6 +3,7 @@
 import torch
 import torch.nn as nn
 import pandas as pd
+import matplotlib.pyplot as plt
 
 class SimpleAutoencoder(nn.Module):
     def __init__(self, input_dim, hidden_dim):
@@ -33,6 +34,9 @@ def run_autoencoder(df, hidden_dim=10):
     criterion = nn.MSELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
     
+    # Track losses for plotting
+    losses = []
+    
     # Train the model
     num_epochs = 100
     for epoch in range(num_epochs):
@@ -41,6 +45,9 @@ def run_autoencoder(df, hidden_dim=10):
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
+        
+        # Store the loss value
+        losses.append(loss.item())
     
     # Extract the latent features
     latent_features = encoded.detach().numpy()
@@ -58,10 +65,19 @@ def run_autoencoder(df, hidden_dim=10):
     gene_approximations = decoded_features_df.loc[top_1000_genes]
     
     # Save the results
-    latent_features_path = 'latent_features_top_1000.csv'
-    gene_approximations_path = 'gene_approximations_top_1000.csv'
-    
+    latent_features_path = '/var/www/html/skocsis2/LFOmics/results/latent_features_top_1000.csv'
+    gene_approximations_path = '/var/www/html/skocsis2/LFOmics/results/gene_approximations_top_1000.csv'
     top_1000_df.to_csv(latent_features_path, index=True)
     gene_approximations.to_csv(gene_approximations_path, index=True)
     
-    return latent_features_path, gene_approximations_path
+    # Plot the training loss
+    plt.figure()
+    plt.plot(losses)
+    plt.title('Model Training Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    loss_plot_path = '/var/www/html/skocsis2/LFOmics/results/loss_curve.png'
+    plt.savefig(loss_plot_path)
+    plt.close()
+    
+    return latent_features_path, gene_approximations_path, loss_plot_path
