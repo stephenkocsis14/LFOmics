@@ -76,7 +76,7 @@ Ensure your data is formatted as a CSV file with gene symbols as rows and sample
 Connect to the JHU VPN and open your web browser and navigate to the following URL to access the LFOmics interface:
 
 ```plaintext
-URL will go here
+http://bfx3.aap.jhu.edu/skocsis2/LFOmics/templates/
 ```
 
 ## Results
@@ -97,9 +97,7 @@ The analysis has been completed. You can download your results below:
 
 - **Model Training Loss**: An image showing the training loss curve of the autoencoder, which indicates how well the model performed during training.
 
-- **Top Enrichment Scores**: A bar plot visualizing the top enriched pathways based on their enrichment scores.
-
-- **P-value Distribution**: A histogram displaying the distribution of p-values across the enriched pathways, helping to assess the statistical significance of the results.
+- **Top 10 Enrichment Scores**: A bar plot visualizing the top enriched pathways based on their enrichment scores.
 
 Each of these outputs is designed to provide you with a comprehensive view of the data analysis process, from the extraction of key features to the identification of significant biological pathways.
 
