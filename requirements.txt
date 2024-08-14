@@ -7,6 +7,7 @@ torch
 
 # Visualization
 matplotlib
+seaborn
 
 # Gene Set Enrichment Analysis
 gseapy
