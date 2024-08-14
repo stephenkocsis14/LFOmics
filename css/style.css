@@ -10,7 +10,7 @@ body {
     min-height: 100vh;
 }
 
-/* Background for the biological network GIF */
+/* Background for the background image */
 body::before,
 body::after {
     content: '';
@@ -18,7 +18,7 @@ body::after {
     top: 0;
     bottom: 0;
     width: 1000px; /* Adjust width as needed */
-    background-image: url('../images/network_simulation.gif'); /* Path to your GIF */
+    background-image: url('../images/network_simulation.gif'); /* Path to image */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left;
