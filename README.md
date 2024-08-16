@@ -97,7 +97,11 @@ The analysis has been completed. You can download your results below:
 
 - **Model Training Loss**: An image showing the training loss curve of the autoencoder, which indicates how well the model performed during training.
 
+ ![loss_curve](https://github.com/user-attachments/assets/15ad3394-1658-48be-870e-a590778fb33c)
+
 - **Top 10 Enrichment Scores**: A bar plot visualizing the top enriched pathways based on their enrichment scores.
+
+  ![top_10_enrichment_scores](https://github.com/user-attachments/assets/c4e99189-a19b-454d-bf8a-da832ae6b793)
 
 Each of these outputs is designed to provide you with a comprehensive view of the data analysis process, from the extraction of key features to the identification of significant biological pathways.
 
